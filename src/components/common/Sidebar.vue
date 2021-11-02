@@ -53,23 +53,24 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-calendar',
-                    index: '1',
+                    index: 'basetable',
                     title: '表单相关',
                     subs: [
-                        {
-                            icon: 'el-icon-lx-cascades',
+                        { 
                             index: 'basetable',
-                            title: '表格1'
+                            title: '城市点位'
                         },
                         {
-                            icon: 'el-icon-lx-cascades',
-                            index: 'basetable',
-                            title: '表格2'
+                            index: 'fxy',
+                            title: '风险源'
                         },
                         {
-                            icon: 'el-icon-lx-cascades',
-                            index: 'basetable',
-                            title: '表格3'
+                            index: 'gyyq',
+                            title: '工业园区'
+                        },
+                        {
+                            index: 'wk',
+                            title: '尾矿'
                         }
                     ]
                 }

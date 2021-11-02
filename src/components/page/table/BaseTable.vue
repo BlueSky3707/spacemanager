@@ -3,7 +3,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item>
-                    <i class="el-icon-lx-cascades"></i> 基础表格
+                    <i class="el-icon-lx-cascades"></i> {{name}}
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -15,12 +15,10 @@
                     class="handle-del mr10"
                     @click="delAllSelection"
                 >批量删除</el-button>
-                <el-select v-model="query.address" placeholder="地址" class="handle-select mr10">
-                    <el-option key="1" label="广东省" value="广东省"></el-option>
-                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
-                </el-select>
-                <el-input v-model="query.name" placeholder="用户名" class="handle-input mr10"></el-input>
+              
+                <el-input v-model="keywords" placeholder="关键字搜索" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+                <el-button type="primary"  @click="exportExcel">导出</el-button>
             </div>
             <el-table
                 :data="tableData"
@@ -29,32 +27,12 @@
                 ref="multipleTable"
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
+                id="city_table"
             >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="用户名"></el-table-column>
-                <el-table-column label="账户余额">
-                    <template slot-scope="scope">￥{{scope.row.money}}</template>
-                </el-table-column>
-                <el-table-column label="头像(查看大图)" align="center">
-                    <template slot-scope="scope">
-                        <el-image
-                            class="table-td-thumb"
-                            :src="scope.row.thumb"
-                            :preview-src-list="[scope.row.thumb]"
-                        ></el-image>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="address" label="地址"></el-table-column>
-                <el-table-column label="状态" align="center">
-                    <template slot-scope="scope">
-                        <el-tag
-                            :type="scope.row.state==='成功'?'success':(scope.row.state==='失败'?'danger':'')"
-                        >{{scope.row.state}}</el-tag>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="date" label="注册时间"></el-table-column>
+            <el-table-column type="selection" width="55" align="center"></el-table-column>
+            <el-table-column v-for="(item,index) in fields" :key="index" :prop="'attributes.'+item.field" :label="item.alias"
+            align="center" :width="item.width"></el-table-column>
+  
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
@@ -75,8 +53,8 @@
                 <el-pagination
                     background
                     layout="total, prev, pager, next"
-                    :current-page="query.pageIndex"
-                    :page-size="query.pageSize"
+                    :current-page="query.current"
+                    :page-size="query.limit"
                     :total="pageTotal"
                     @current-change="handlePageChange"
                 ></el-pagination>
@@ -102,22 +80,37 @@
 </template>
 
 <script>
-import { fetchData } from '../../api/index';
+
+import * as postgis from '../../../api/postgis'
+
 export default {
-    name: 'basetable',
+  
     data() {
         return {
+            name:"城市",
+            fields:[
+                {field: "name", alias: "名称",width:"auto"},
+                {field: "citycode", alias: "代码",width:"auto"},
+                {field: "x", alias: "经度",width:"auto"},
+                {field: "y", alias: "纬度",width:"auto"}
+            ],
+            searchfields:["name","citycode"],
             query: {
-                address: '',
-                name: '',
-                pageIndex: 1,
-                pageSize: 10
+                layerName:"citypt",
+                filter:"",
+                isCache:false,
+                isReturnGeometry:true,
+                spatialRel:"INTERSECTS",
+                filter:"",
+                current: 1,
+                limit:10
             },
             tableData: [],
             multipleSelection: [],
             delList: [],
             editVisible: false,
             pageTotal: 0,
+            keywords:"",
             form: {},
             idx: -1,
             id: -1
@@ -129,15 +122,28 @@ export default {
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            fetchData(this.query).then(res => {
-                console.log(res);
-                this.tableData = res.list;
-                this.pageTotal = res.pageTotal || 50;
-            });
+            postgis.search(this.query).then(res => {
+                if(res.data.data.features&&res.data.data.features.length>0){
+                        this.tableData = res.data.data.features;
+                        this.pageTotal = res.data.data.totalCount || 0;
+                }else{
+                   this.tableData = [];
+                        this.pageTotal =  0; 
+                }
+            })
         },
         // 触发搜索按钮
         handleSearch() {
-            this.$set(this.query, 'pageIndex', 1);
+            var sql=""
+            if(this.keywords){
+                var str=[];
+                this.searchfields.forEach(ite => {
+                   str.push(ite+" like'%"+this.keywords+ "%'"); 
+                });
+               sql= str.join(" or ")
+            }
+            this.$set(this.query, 'current', 1);
+            this.$set(this.query, 'filter', sql);
             this.getData();
         },
         // 删除操作
@@ -180,11 +186,32 @@ export default {
         },
         // 分页导航
         handlePageChange(val) {
-            this.$set(this.query, 'pageIndex', val);
+            this.$set(this.query, 'current', val);
             this.getData();
-        }
+        },
+  
+    exportExcel() {
+          var that=this
+        require.ensure([], () => {   
+            const tHeader = [];  //表头名
+            const filterVal = [];  //表头字段
+               const { export_json_to_excel } = require("../../../utils/Export2Excel");
+            this.fields.forEach(item=>{
+                tHeader.push(item.alias)
+                filterVal.push(item.field)
+            })          
+            const list = that.tableData;  //表格内容
+            const data = that.formatJson(filterVal, list);  
+            export_json_to_excel(tHeader, data, "城市");
+        });
+    },
+    formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v.attributes[j]));
     }
-};
+
+  }
+}
+
 </script>
 
 <style scoped>

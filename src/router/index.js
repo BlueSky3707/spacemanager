@@ -21,8 +21,23 @@ export default new Router({
                 },
                 {
                     path: '/basetable',
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/BaseTable.vue'),
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/BaseTable.vue'),
                     meta: { title: '基础表格' }
+                },
+                {
+                    path: '/fxy',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/fxy.vue'),
+                    meta: { title: '风险源' }
+                },
+                {
+                    path: '/gyyq',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/gyyq.vue'),
+                    meta: { title: '工业园区' }
+                },
+                {
+                    path: '/wk',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/wk.vue'),
+                    meta: { title: '尾矿' }
                 }
             ]
         },
@@ -30,10 +45,6 @@ export default new Router({
             path: '/login',
             component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
             meta: { title: '登录' }
-        },
-        {
-            path: '*',
-            redirect: '/404'
         }
     ]
 });
