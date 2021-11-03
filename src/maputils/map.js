@@ -9,13 +9,24 @@ export default class HxMap {
     static HmapView;
     static addGSBaseLayer() {
       const pLayer = new TileLayer({
-        url: mapConfig.serverConfig.jyyxdt
+        url: mapConfig.serverConfig.jyyxdt,
+        title: '电子地图',
+        id: 'dzdt',
+        visible: true,
+        opacity: 1
+
       })
       const dwpLayer = new TileLayer({
-        url: mapConfig.serverConfig.dwzyx
+        url: mapConfig.serverConfig.dwzyx,
+        title: '影像地图',
+        id: 'yxdt',
+        visible: false,
+        opacity: 1
       })
       const wLayer = new MapImageLayer({
-        url: mapConfig.serverConfig.gsby
+        url: mapConfig.serverConfig.gsby,
+        title: '区县',
+        id: 'xzqx'
       })
       const stamen = new Basemap({
         baseLayers: [
@@ -33,13 +44,10 @@ export default class HxMap {
       })
       const mapView = new MapView({
         map: map,
-        // scale: 500,
+     
         container: ids,
         constraints: {
-          // minZoom: 8,
-          // maxZoom: 18,
-          // maxScale: 500,
-          // minScale: 1000000
+        
         },
         zoom: 8,
         highlightOptions: {

@@ -1,7 +1,6 @@
 <template>
     <div id="content">
         <HxMap></HxMap>
-        <LayerSwitch></LayerSwitch>
         <Maptools></Maptools>
     </div>
 </template>
@@ -32,10 +31,10 @@ export default {
 <style scoped>
 #content {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 30px);
   overflow: hidden;
   position: absolute;
-  top: 0;
+  top: 30px;
   left: 0;
 }
 

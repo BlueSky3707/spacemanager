@@ -1,5 +1,5 @@
 
-import HxMap from '../maputils/HxMap'
+import HxMap from '../maputils/map'
 import TileLayer from '@arcgis/core/layers/TileLayer'
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer'
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer'
