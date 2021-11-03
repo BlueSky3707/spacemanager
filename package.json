@@ -8,6 +8,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@arcgis/core": "^4.21.2",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "default-passive-events": "^2.0.0",

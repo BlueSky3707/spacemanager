@@ -11,6 +11,7 @@ import './components/common/directives';
 import 'babel-polyfill';
 import 'default-passive-events'
 
+
 Vue.config.productionTip = false;
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
