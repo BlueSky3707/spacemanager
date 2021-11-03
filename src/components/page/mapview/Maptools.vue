@@ -84,12 +84,12 @@ el-button.is-circle {
     height: 29px!important;
 }
 .mapchange{
-top: 45px;
+    top: 45px;
     right: 10px;
     position: absolute;
     background-color: white;
     width: 35px;
-    height: 28px;
+    height: 26px;
     text-align: center;
     border-radius: 17px;
     padding: 4px 0;

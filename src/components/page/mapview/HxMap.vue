@@ -14,7 +14,7 @@ export default {
   },
   async mounted () {
     await map.intMap('mapid')
-    map.HmapView.scale = 5000
+    // map.HmapView.scale = 5000
   }
 
 }

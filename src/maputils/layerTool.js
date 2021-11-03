@@ -87,13 +87,26 @@ export default class layerTool {
   printTask.execute(params).then( 
     function (data) {
         if (data.url) { 
-          that.downloadIamge(data.url,"地图")
+          var timers=new Date();
+          var fullYear=timers.getFullYear();
+          var month=timers.getMonth()+1;
+          var date=timers.getDate();
+          var randoms=Math.random()+'';
+          //年月日加上随机数
+          var numberFileName=fullYear+''+month+date+randoms.slice(3,10);
+          that.downloadIamge(data.url,numberFileName)
         } else {
-          console.log("")
+          this.$message({
+            message: '打印出错',
+            type: 'warning'
+          });
         }
 
      },function (err) {
-        console.log("") 
+        this.$message({
+          message: '打印出错',
+          type: 'warning'
+        });
       }
     )
 }

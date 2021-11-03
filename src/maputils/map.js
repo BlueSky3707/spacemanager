@@ -66,6 +66,7 @@ export default class HxMap {
       mapView.ui.remove('zoom')
       mapView.ui.remove('attribution')
       this.HmapView = mapView
+      window.mapwiew=mapView
     }
   }
   
