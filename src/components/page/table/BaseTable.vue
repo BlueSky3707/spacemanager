@@ -9,12 +9,7 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-button
-                    type="primary"
-                    icon="el-icon-delete"
-                    class="handle-del mr10"
-                    @click="delAllSelection"
-                >批量删除</el-button>
+            
               
                 <el-input v-model="keywords" placeholder="关键字搜索" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
@@ -22,11 +17,13 @@
             </div>
             <el-table
                 :data="tableData"
+               
                 border
                 class="table"
                 ref="multipleTable"
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
+                 @row-click="itemClick"
                 id="city_table"
             >
             <el-table-column type="selection" width="55" align="center"></el-table-column>
@@ -40,12 +37,12 @@
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
-                        <el-button
+                        <!-- <el-button
                             type="text"
                             icon="el-icon-delete"
                             class="red"
                             @click="handleDelete(scope.$index, scope.row)"
-                        >删除</el-button>
+                        >删除</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
@@ -81,8 +78,8 @@
 
 <script>
 
-import * as postgis from '../../../api/postgis'
-
+import * as postgis from '@/api/postgis'
+import store from '@/store'
 export default {
   
     data() {
@@ -207,6 +204,11 @@ export default {
     },
     formatJson(filterVal, jsonData) {
         return jsonData.map(v => filterVal.map(j => v.attributes[j]));
+    },
+    itemClick(row){
+         store.state.selectItem=row
+       this.$router.push("/")
+
     }
 
   }

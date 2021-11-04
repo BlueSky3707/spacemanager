@@ -72,9 +72,19 @@ export default {
     position: absolute;
     background-color: #3a93f9;
     line-height: 35px;
-    padding: 0px 2px 2px 7px;
+    padding: 2px 2px 2px 7px;
     border-radius: 8px;
 
+}
+.maptools button{
+      background-color: #3a93f9;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: initial;
+}
+.maptools .el-button+.el-button {
+    margin-left: 3px;
 }
 .toolsClass:hover{
   background-color:  #409EFF;
