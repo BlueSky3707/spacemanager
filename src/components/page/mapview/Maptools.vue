@@ -67,7 +67,7 @@ export default {
 .maptools{
        width: 147px;
     height: 35px;
-    top: 3px;
+    top: 40px;
     right: 10px;
     position: absolute;
     background-color: #3a93f9;
@@ -94,7 +94,7 @@ el-button.is-circle {
     height: 29px!important;
 }
 .mapchange{
-    top: 45px;
+    top: 85px;
     right: 10px;
     position: absolute;
     background-color: white;

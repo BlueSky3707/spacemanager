@@ -83,11 +83,11 @@ export default {
 <style scoped>
 #content {
   width: 100%;
-  height: calc(100vh - 30px);
+  height: calc(100vh - 100px);
   overflow: hidden;
-  position: absolute;
-  top: 30px;
-  left: 0;
+  /* position: absolute; */
+  /* top: 30px;
+  left: 0; */
 }
 
 
