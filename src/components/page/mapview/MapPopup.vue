@@ -16,10 +16,10 @@
 
 <script>
 import DragElement from '../../../utils/drag'
+import store from '@/store'
 export default {
   data() {
     return {
-      store: null,
       zjdData: null
     }
   },
@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     close() {
-      
+     store.commit('PopupShow', false)
     }
   }
 }
