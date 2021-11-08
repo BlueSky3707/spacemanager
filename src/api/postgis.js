@@ -89,24 +89,4 @@ export const deleteData = (params) => {
     data:params
   })
 }
-export const getInters = (params) => {
 
-  return axios({
-    url: '/riverapi/hx/getInters', 
-    params
-  }).then(res => {
-    return JSON.parse(res.data.st_asgeojson).coordinates;
-  })
-}
-export const getNearestCoordinate = (params) => {
- return fetch("/riverapi/hx/getNearestCoordinate", {
-    method: "POST",
-    mode: "cors",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(params),
-  }).then((res) => res.json())
- 
-}

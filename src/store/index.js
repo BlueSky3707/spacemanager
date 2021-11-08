@@ -5,11 +5,13 @@ Vue.use(Vuex)
 Vue.config.devtools = true
 export default new Vuex.Store({
   state: {
-    selectItem:null
+    selectItem:null,
+    isPopupShow:false
   },
   mutations: {
-  
-
+    PopupShow(state, show) {
+      state.isPopupShow = show
+    },
 
   },
   modules: {

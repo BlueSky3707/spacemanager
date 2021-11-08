@@ -9,25 +9,8 @@ import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer'
 export default class HxMap {
     static HmapView;
     static addGSBaseLayer() {
-      const pLayer = new TileLayer({
-        url: mapConfig.serverConfig.jyyxdt,
-        title: '电子地图',
-        id: 'dzdt',
-        visible: true,
-        opacity: 1
-
-      })
-      const dwpLayer = new TileLayer({
-        url: mapConfig.serverConfig.dwzyx,
-        title: '影像地图',
-        id: 'yxdt',
-        visible: false,
-        opacity: 1
-      })
-      const wLayer = new MapImageLayer({
-        url: mapConfig.serverConfig.gsby,
-        title: '区县',
-        id: 'xzqx'
+      const pbaseLayer=new TileLayer({
+        url:mapConfig.serverConfig.dtbaselayer
       })
       const xzLayer = new TileLayer({
         url: mapConfig.serverConfig.tdlyxz,
@@ -37,10 +20,10 @@ export default class HxMap {
       
       const stamen = new Basemap({
         baseLayers: [
-          wLayer,
-          pLayer,
-          dwpLayer,
-          xzLayer
+           //wLayer,
+          // pLayer,
+          // dwpLayer
+          pbaseLayer,
         ]
       })
       return stamen
@@ -52,12 +35,10 @@ export default class HxMap {
       })
       const mapView = new MapView({
         map: map,
-     
         container: ids,
         constraints: {
         
         },
-        zoom: 8,
         highlightOptions: {
           color: [255, 0, 0, 1],
           haloOpacity: 0.9,

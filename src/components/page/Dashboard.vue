@@ -11,6 +11,7 @@ import HxMapView from '../../maputils/map'
 import Maptools from '../page/mapview/Maptools'
 import store from '@/store'
 import Point from '@arcgis/core/geometry/Point'
+import Polygon from '@arcgis/core/geometry/Polygon'
 import Graphic from '@arcgis/core/Graphic'
 export default {
     name: 'dashboard',
@@ -46,10 +47,10 @@ export default {
 
     methods: {
         drawGeom(item){
-            if(item.geoJson){
-             var geo= JSON.parse(item.geoJson)
-             if(geo.type.toLowerCase()==="point"){
-                 var point=new Point(geo.coordinates)
+            if(item.geometry){
+           
+             if(item.geometry.type.toLowerCase()==="point"){
+                 var point=new Point(item.geometry.coordinates)
                  point.spatialReference=  {latestWkid:4523,wkid: 4523 } ;
                 const pointGraphic = new Graphic({
                     geometry: point,
@@ -65,14 +66,31 @@ export default {
                 })
             
                   HxMapView.HmapView.graphics.removeAll();
-                 
-                    if(HxMapView.HmapView){
-                        HxMapView.HmapView.graphics.add(pointGraphic) 
-                        var view=HxMapView.HmapView
-                        HxMapView.HmapView.center= point
-                    }
-               
-               
+                  HxMapView.HmapView.graphics.add(pointGraphic) 
+                  HxMapView.HmapView.center= point     
+             }else if(item.geometry.type.toLowerCase()==="multipolygon"||item.geometry.type.toLowerCase()==="polygon"){
+                     var polygon=new Polygon( {
+                            rings: item.geometry.coordinates[0],
+                            
+                        });
+                       polygon.spatialReference=  {latestWkid:4523, wkid: 4523 };
+                    //    polygon.extent.spatialReference=  {latestWkid:4523, wkid: 4523 };
+                     const pointGraphic = new Graphic({
+                        geometry: polygon,
+                        symbol: {
+                            type: 'simple-fill',
+                            color: [0, 0, 255, 0.5],
+                            style: 'solid',
+                            outline: {
+                                color: 'red',
+                                width: 1
+                            }
+                        },
+                    attributes:item.properties
+                })
+                  HxMapView.HmapView.graphics.removeAll();
+                  HxMapView.HmapView.graphics.add(pointGraphic)
+                  HxMapView.HmapView.extent =polygon.extent 
              }
             }
         }

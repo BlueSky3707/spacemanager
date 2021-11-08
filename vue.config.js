@@ -11,13 +11,14 @@ module.exports = {
               '^/postgisapi': ''
             }
           },
-          '/severapi': {   
-            target: 'http://localhost:8089',   
+          '/api': {
+            // 统一接口
+            target: 'http://121.36.226.49:6022', // 线上
             changeOrigin: true,
             pathRewrite: {
-              '^/severapi': ''
+              '^/api': ''
             }
-          },
+          }
         }
     }
 }

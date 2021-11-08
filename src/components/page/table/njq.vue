@@ -28,7 +28,7 @@
             >
             <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
             <el-table-column v-for="(item,index) in fields" :key="index" :prop="'properties.'+item.field" :label="item.alias"
-            align="center" :width="item.width" :title="'properties.'+item.field"></el-table-column>
+            align="center" :width="item.width" ></el-table-column>
   
                 <!-- <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
