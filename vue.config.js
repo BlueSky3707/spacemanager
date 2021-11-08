@@ -5,10 +5,17 @@ module.exports = {
     devServer: {
         proxy: {
           '/postgisapi': {   
-            target: 'http://10.61.5.63:8084',   
+            target: 'http://localhost:8087',   
             changeOrigin: true,
             pathRewrite: {
               '^/postgisapi': ''
+            }
+          },
+          '/severapi': {   
+            target: 'http://localhost:8089',   
+            changeOrigin: true,
+            pathRewrite: {
+              '^/severapi': ''
             }
           },
         }

@@ -61,7 +61,7 @@ export default {
                                 width: 1
                             }
                     },
-                    attributes:item.attributes
+                    attributes:item.properties
                 })
             
                   HxMapView.HmapView.graphics.removeAll();

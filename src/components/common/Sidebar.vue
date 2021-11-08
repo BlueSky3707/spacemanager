@@ -53,25 +53,32 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-calendar',
-                    index: 'basetable',
+                    index: 'njq',
                     title: '表单相关',
                     subs: [
                         { 
-                            index: 'basetable',
-                            title: '城市点位'
-                        },
-                        {
-                            index: 'fxy',
-                            title: '风险源'
-                        },
-                        {
-                            index: 'gyyq',
-                            title: '工业园区'
-                        },
-                        {
-                            index: 'wk',
-                            title: '尾矿'
+                            
+                            index: '0',
+                            title: '其他',
+                            subs:[
+                                {
+                                    index: 'njq',
+                                    title: '农经权',
+                                },
+                                {
+                                     index: 'sdsj',
+                                     title: '三调数据',
+                                },
+                                {
+                                    index: 'zjd',
+                                    title: '宅基地'
+                                    
+                                 }
+                            ]
                         }
+                       
+                        
+                        
                     ]
                 }
             ]

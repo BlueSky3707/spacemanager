@@ -13,5 +13,6 @@ export const serverConfig = {
     gsby: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gs_by2000dt/MapServer',
     jyyxdt: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gs_bywpdt/MapServer',
     dwzyx: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/dwziamge/MapServer',
-    printUrl:"http://121.36.226.49:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
+    printUrl:"http://121.36.226.49:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+    tdlyxz:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer"
 };

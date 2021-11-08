@@ -26,25 +26,25 @@
                  @row-click="itemClick"
                 id="city_table"
             >
-            <el-table-column type="selection" width="55" align="center"></el-table-column>
-            <el-table-column v-for="(item,index) in fields" :key="index" :prop="'attributes.'+item.field" :label="item.alias"
+            <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
+            <el-table-column v-for="(item,index) in fields" :key="index" :prop="'properties.'+item.field" :label="item.alias"
             align="center" :width="item.width"></el-table-column>
   
-                <el-table-column label="操作" width="180" align="center">
+                <!-- <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
                             type="text"
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
-                        <!-- <el-button
+                         <el-button
                             type="text"
                             icon="el-icon-delete"
                             class="red"
                             @click="handleDelete(scope.$index, scope.row)"
-                        >删除</el-button> -->
+                        >删除</el-button>
                     </template>
-                </el-table-column>
+                </el-table-column> -->
             </el-table>
             <div class="pagination">
                 <el-pagination
@@ -84,18 +84,23 @@ export default {
   
     data() {
         return {
-            name:"城市",
+            name:"宅基地",
             fields:[
-                {field: "name", alias: "名称",width:"auto"},
-                {field: "citycode", alias: "代码",width:"auto"},
-                {field: "x", alias: "经度",width:"auto"},
-                {field: "y", alias: "纬度",width:"auto"}
+                {field: "zddm", alias: "占地代码",width:"auto"},
+                {field: "zl", alias: "坐落",width:"300"},
+                {field: "zldwmc", alias: "坐落单位名称",width:"150"},
+                 {field: "zldwdm", alias: "坐落单位代码",width:"120"},
+                {field: "zdmj", alias: "占地面积",width:"auto"},
+                {field: "jzmj", alias: "建筑面积",width:"auto"},
+                {field: "qlr", alias: "权利人",width:"auto"},
+                {field: "bsm", alias: "标识码",width:"60"}
+
+
             ],
             searchfields:["name","citycode"],
             query: {
-                layerName:"citypt",
+                layerName:"zjd",
                 filter:"",
-                isCache:false,
                 isReturnGeometry:true,
                 spatialRel:"INTERSECTS",
                 filter:"",
@@ -199,11 +204,11 @@ export default {
             })          
             const list = that.tableData;  //表格内容
             const data = that.formatJson(filterVal, list);  
-            export_json_to_excel(tHeader, data, "城市");
+            export_json_to_excel(tHeader, data, that.name);
         });
     },
     formatJson(filterVal, jsonData) {
-        return jsonData.map(v => filterVal.map(j => v.attributes[j]));
+        return jsonData.map(v => filterVal.map(j => v.properties[j]));
     },
     itemClick(row){
          store.state.selectItem=row

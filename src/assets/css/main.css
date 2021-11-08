@@ -50,8 +50,12 @@ a {
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
+    height: calc(100vh - 150px);
+    overflow: auto;
 }
-
+.container::-webkit-scrollbar{
+    width: 1px;
+  }
 .crumbs {
     margin: 10px 0;
 }
@@ -174,4 +178,10 @@ a {
 
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
+}
+
+.el-table td.el-table__cell div{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

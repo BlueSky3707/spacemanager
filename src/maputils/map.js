@@ -5,6 +5,7 @@ import * as mapConfig from '../maputils/mapconfig'
 import Extent from '@arcgis/core/geometry/Extent'
 import TileLayer from '@arcgis/core/layers/TileLayer'
 import MapImageLayer from '@arcgis/core/layers/MapImageLayer'
+import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer'
 export default class HxMap {
     static HmapView;
     static addGSBaseLayer() {
@@ -28,11 +29,18 @@ export default class HxMap {
         title: '区县',
         id: 'xzqx'
       })
+      const xzLayer = new TileLayer({
+        url: mapConfig.serverConfig.tdlyxz,
+        title: '土地利用现状',
+        id: 'tdlyxzid'
+      })
+      
       const stamen = new Basemap({
         baseLayers: [
           wLayer,
           pLayer,
-          dwpLayer
+          dwpLayer,
+          xzLayer
         ]
       })
       return stamen

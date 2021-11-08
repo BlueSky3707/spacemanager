@@ -9,40 +9,42 @@
         </div>
         <div class="container">
             <div class="handle-box">
-               
             
+              
                 <el-input v-model="keywords" placeholder="关键字搜索" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
-                  <el-button type="primary"  @click="exportExcel">导出</el-button>
+                <el-button type="primary"  @click="exportExcel">导出</el-button>
             </div>
             <el-table
                 :data="tableData"
+               
                 border
                 class="table"
                 ref="multipleTable"
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
-                    @row-click="itemClick"
+                 @row-click="itemClick"
+                id="city_table"
             >
-    <el-table-column type="selection" width="55" align="center"></el-table-column>
-     <el-table-column v-for="(item,index) in fields" :key="index" :prop="'attributes.'+item.field" :label="item.alias"
-      align="center" :width="item.width"></el-table-column>
+            <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
+            <el-table-column v-for="(item,index) in fields" :key="index" :prop="'properties.'+item.field" :label="item.alias"
+            align="center" :width="item.width"></el-table-column>
   
-                <el-table-column label="操作" width="180" align="center">
+                <!-- <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
                             type="text"
                             icon="el-icon-edit"
                             @click="handleEdit(scope.$index, scope.row)"
                         >编辑</el-button>
-                        <!-- <el-button
+                         <el-button
                             type="text"
                             icon="el-icon-delete"
                             class="red"
                             @click="handleDelete(scope.$index, scope.row)"
-                        >删除</el-button> -->
+                        >删除</el-button> 
                     </template>
-                </el-table-column>
+                </el-table-column> -->
             </el-table>
             <div class="pagination">
                 <el-pagination
@@ -76,24 +78,40 @@
 
 <script>
 
-import * as postgis from '../../../api/postgis'
+import * as postgis from '@/api/postgis'
 import store from '@/store'
 export default {
-    
+  
     data() {
         return {
-             name:"风险源",
-            fields:[{field: "name", alias: "名称",width:"auto"},
-                {field: "city", alias: "城市",width:"200"},
-                {field: "address", alias: "地址",width:"300"},
-                {field: "x", alias: "经度",width:"80"},
-                {field: "y", alias: "纬度",width:"80"}
-                ],
-            searchfields:["name","city","address"],   
+            name:"三调数据",
+            fields:[
+                {field: "bsm", alias: "标识码",width:"200"},
+                {field: "ysdm", alias: "要素代码",width:"auto"},
+                // {field: "tbybh", alias: "图斑预编号",width:"auto"},
+                {field: "tbbh", alias: "图斑编号",width:"auto"},
+
+                {field: "dlbm", alias: "地类编码",width:"auto"},
+                {field: "dlmc", alias: "地类名称",width:"auto"},
+                {field: "qsxz", alias: "权属性质",width:"auto"},
+                {field: "qsdwdm", alias: "权属单位代码",width:"120"},
+                {field: "qsdwmc", alias: "权属单位名称",width:"120"},
+                {field: "zldwdm", alias: "坐落单位代码",width:"120"},
+                {field: "zldwmc", alias: "坐落单位名称",width:"120"},
+                {field: "tbmj", alias: "图斑面积",width:"auto"} ,
+
+                // {field: "kcdlbm", alias: "扣除地类编码",width:"auto"},
+                {field: "kcxs", alias: "扣除地类系数",width:"auto"},
+                {field: "kcmj", alias: "扣除地类面积",width:"auto"},
+                {field: "tbdlmj", alias: "图斑地类面积",width:"auto"},
+                {field: "gdlx", alias: "耕地类型",width:"auto"},
+                {field: "gdpdjb", alias: "耕地坡度级别",width:"auto"}
+
+            ],
+            searchfields:["dlmc","zldwmc"],
             query: {
-                layerName:"sx_fxy",
+                layerName:"sdsj",
                 filter:"",
-                isCache:false,
                 isReturnGeometry:true,
                 spatialRel:"INTERSECTS",
                 filter:"",
@@ -129,7 +147,6 @@ export default {
         },
         // 触发搜索按钮
         handleSearch() {
-      
             var sql=""
             if(this.keywords){
                 var str=[];
@@ -138,10 +155,9 @@ export default {
                 });
                sql= str.join(" or ")
             }
-             this.$set(this.query, 'current', 1);
+            this.$set(this.query, 'current', 1);
             this.$set(this.query, 'filter', sql);
             this.getData();
-        
         },
         // 删除操作
         handleDelete(index, row) {
@@ -186,31 +202,34 @@ export default {
             this.$set(this.query, 'current', val);
             this.getData();
         },
-        exportExcel() {
+  
+    exportExcel() {
           var that=this
-            require.ensure([], () => {   
-                const tHeader = [];  //表头名
-                const filterVal = [];  //表头字段
-                const { export_json_to_excel } = require("../../../utils/Export2Excel");
-                this.fields.forEach(item=>{
-                    tHeader.push(item.alias)
-                    filterVal.push(item.field)
-                })          
-                const list = that.tableData;  //表格内容
-                const data = that.formatJson(filterVal, list);  
-                export_json_to_excel(tHeader, data, that.name);
-            });
-        },
-        formatJson(filterVal, jsonData) {
-            return jsonData.map(v => filterVal.map(j => v.attributes[j]));
-        },
-        itemClick(row){
-            store.state.selectItem=row
-            this.$router.push("/")
+        require.ensure([], () => {   
+            const tHeader = [];  //表头名
+            const filterVal = [];  //表头字段
+               const { export_json_to_excel } = require("../../../utils/Export2Excel");
+            this.fields.forEach(item=>{
+                tHeader.push(item.alias)
+                filterVal.push(item.field)
+            })          
+            const list = that.tableData;  //表格内容
+            const data = that.formatJson(filterVal, list);  
+            export_json_to_excel(tHeader, data, that.name);
+        });
+    },
+    formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v.properties[j]));
+    },
+    itemClick(row){
+         store.state.selectItem=row
+       this.$router.push("/")
 
-        }
     }
-};
+
+  }
+}
+
 </script>
 
 <style scoped>

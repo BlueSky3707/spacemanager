@@ -43,9 +43,10 @@ export default {
     changeGisShow (){
       this.gisShow = !this.gisShow
       if (this.gisShow) {
-        this.vectorClick()
-      } else {
         this.imageClick()
+      } else {
+        this.vectorClick()
+      
       }
     },
     imageClick ()  {

@@ -11,34 +11,29 @@ export default new Router({
         },
         {
             path: '/',
-            component: () => import(/* webpackChunkName: "home" */ '../components/common/Home.vue'),
+            component: () => import( '../components/common/Home.vue'),
             meta: { title: '自述文件' },
             children: [
                 {
                     path: '/dashboard',
-                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Dashboard.vue'),
+                    component: () => import('../components/page/Dashboard.vue'),
                     meta: { title: '系统首页' }
                 },
                 {
-                    path: '/basetable',
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/BaseTable.vue'),
-                    meta: { title: '基础表格' }
+                    path: '/njq',
+                    component: () => import( '../components/page/table/njq.vue'),
+                    meta: { title: '农经权' }
                 },
                 {
-                    path: '/fxy',
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/fxy.vue'),
-                    meta: { title: '风险源' }
+                    path: '/zjd',
+                    component: () => import('../components/page/table/zjd.vue'),
+                    meta: { title: '宅基地' }
                 },
                 {
-                    path: '/gyyq',
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/gyyq.vue'),
-                    meta: { title: '工业园区' }
-                },
-                {
-                    path: '/wk',
-                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/wk.vue'),
-                    meta: { title: '尾矿' }
-                }
+                    path: '/sdsj',
+                    component: () => import(/* webpackChunkName: "icon" */ '../components/page/table/sdsj.vue'),
+                    meta: { title: '三调' }
+                } 
             ]
         },
         {
