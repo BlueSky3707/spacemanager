@@ -14,7 +14,7 @@ export default {
   },
   async mounted () {
     await map.intMap('mapid')
-    // map.HmapView.scale = 5000
+     map.HmapView.scale = 5000
   }
 
 }
@@ -23,6 +23,7 @@ export default {
 #mainid,#mapid {
   width: 100%;
   height: 100%;
+  background: #ffffff;
 }
 #maptools{
   width: 100px;

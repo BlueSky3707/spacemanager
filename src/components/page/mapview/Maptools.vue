@@ -1,16 +1,16 @@
 <template>
-<div>
-  <div class="maptools">  
-    <el-button size="mini" class="toolsClass"  icon="el-icon-camera" circle @click="printMap"></el-button>
-    <el-button size="mini" class="toolsClass"  icon="el-icon-share" circle @click="drawLine"></el-button>
-    <el-button size="mini" class="toolsClass"  icon="el-icon-collection-tag" circle @click="draArea"></el-button>
-    <el-button size="mini" class="toolsClass"  icon="el-icon-delete" circle @click="clearMap"></el-button>
-  </div>
-   <div class="mapchange" @click="changeGisShow">
-        <img v-if="gisShow" src="../../../assets/tools/gis2.png" alt="" srcset="" style="width:26px" />
-        <img v-else src="../../../assets/tools/gis1.png" alt="" srcset="" style="width:26px" />
+    <div>
+        <div class="maptools">
+            <el-button size="mini" class="toolsClass" icon="el-icon-camera" circle @click="printMap"></el-button>
+            <el-button size="mini" class="toolsClass" icon="el-icon-share" circle @click="drawLine"></el-button>
+            <el-button size="mini" class="toolsClass" icon="el-icon-collection-tag" circle @click="draArea"></el-button>
+            <el-button size="mini" class="toolsClass" icon="el-icon-delete" circle @click="clearMap"></el-button>
+        </div>
+        <div class="mapchange" @click="changeGisShow">
+            <img v-if="gisShow" src="../../../assets/tools/gis2.png" alt="" srcset="" style="width: 26px" />
+            <img v-else src="../../../assets/tools/gis1.png" alt="" srcset="" style="width: 26px" />
+        </div>
     </div>
-  </div>
 </template>
 <script>
 import  layerTool from '@/maputils/layerTool'
@@ -51,12 +51,12 @@ export default {
     imageClick ()  {
       BaseLayerUtils.showLayerByid("yxdt")
       BaseLayerUtils.hideLayerByid("dzdt")
-
+      let player=window.mapwiew.map.findLayerById("dtid")
     },
      vectorClick  ()  {
         BaseLayerUtils.showLayerByid("dzdt")
         BaseLayerUtils.hideLayerByid("yxdt")
-       
+
     },
   }
 
@@ -64,8 +64,8 @@ export default {
 </script>
 
 <style>
-.maptools{
-       width: 147px;
+.maptools {
+    width: 147px;
     height: 35px;
     top: 3px;
     right: 10px;
@@ -74,16 +74,15 @@ export default {
     line-height: 35px;
     padding: 0px 2px 2px 7px;
     border-radius: 8px;
-
 }
-.toolsClass:hover{
-  background-color:  #409EFF;
-   color:#efefef !important;
+.toolsClass:hover {
+    background-color: #409eff;
+    color: #efefef !important;
 }
 el-button.is-circle {
-    height: 29px!important;
+    height: 29px !important;
 }
-.mapchange{
+.mapchange {
     top: 45px;
     right: 10px;
     position: absolute;
@@ -93,5 +92,6 @@ el-button.is-circle {
     text-align: center;
     border-radius: 17px;
     padding: 4px 0;
+    display: none;
 }
 </style>
