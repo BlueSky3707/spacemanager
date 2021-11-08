@@ -67,23 +67,44 @@ export default {
 .maptools {
     width: 147px;
     height: 35px;
-    top: 3px;
+    top: 40px;
     right: 10px;
     position: absolute;
     background-color: #3a93f9;
     line-height: 35px;
-    padding: 0px 2px 2px 7px;
+    padding: 2px 2px 2px 7px;
     border-radius: 8px;
 }
+<<<<<<< HEAD
 .toolsClass:hover {
     background-color: #409eff;
     color: #efefef !important;
+=======
+.maptools button{
+      background-color: #3a93f9;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: initial;
+}
+.maptools .el-button+.el-button {
+    margin-left: 3px;
+}
+.toolsClass:hover{
+  background-color:  #409EFF;
+   color:#efefef !important;
+>>>>>>> deb4b0724d363092f1f1d7681d2649c4128b4f8e
 }
 el-button.is-circle {
     height: 29px !important;
 }
+<<<<<<< HEAD
 .mapchange {
     top: 45px;
+=======
+.mapchange{
+    top: 85px;
+>>>>>>> deb4b0724d363092f1f1d7681d2649c4128b4f8e
     right: 10px;
     position: absolute;
     background-color: white;

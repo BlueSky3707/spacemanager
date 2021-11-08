@@ -36,8 +36,8 @@ a {
 .content {
     width: auto;
     height: 100%;
-    padding: 10px;
-    overflow-y: scroll;
+    padding: 0px;
+    overflow-y: hidden;
     box-sizing: border-box;
 }
 
