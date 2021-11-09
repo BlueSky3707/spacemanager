@@ -218,6 +218,7 @@ export default {
         return jsonData.map(v => filterVal.map(j => v.properties[j]));
     },
     itemClick(row){
+        row.table=this.query.layerName
          store.state.selectItem=row
        this.$router.push("/")
 

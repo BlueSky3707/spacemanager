@@ -2,6 +2,7 @@
     <div id="content">
         <HxMap></HxMap>
         <Maptools></Maptools>
+        <MapPopup></MapPopup>
     </div>
 </template>
 
@@ -9,6 +10,7 @@
 import HxMap from '../page/mapview/HxMap'
 import HxMapView from '../../maputils/map'
 import Maptools from '../page/mapview/Maptools'
+import MapPopup from '../page/mapview/MapPopup'
 import store from '@/store'
 import Point from '@arcgis/core/geometry/Point'
 import Polygon from '@arcgis/core/geometry/Polygon'
@@ -31,7 +33,7 @@ export default {
     },
     components: {
         HxMap,
-        Maptools
+        Maptools,MapPopup
 
     },
     computed: {
@@ -64,7 +66,6 @@ export default {
                     },
                     attributes:item.properties
                 })
-            
                   HxMapView.HmapView.graphics.removeAll();
                   HxMapView.HmapView.graphics.add(pointGraphic) 
                   HxMapView.HmapView.center= point     
@@ -74,7 +75,6 @@ export default {
                             
                         });
                        polygon.spatialReference=  {latestWkid:4523, wkid: 4523 };
-                    //    polygon.extent.spatialReference=  {latestWkid:4523, wkid: 4523 };
                      const pointGraphic = new Graphic({
                         geometry: polygon,
                         symbol: {
@@ -91,6 +91,7 @@ export default {
                   HxMapView.HmapView.graphics.removeAll();
                   HxMapView.HmapView.graphics.add(pointGraphic)
                   HxMapView.HmapView.extent =polygon.extent 
+                  store.commit('PopupShow', true)
              }
             }
         }
