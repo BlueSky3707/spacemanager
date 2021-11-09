@@ -2,17 +2,17 @@
     <div id="content">
         <HxMap></HxMap>
         <Maptools></Maptools>
+        <MapPopup></MapPopup>
     </div>
 </template>
 
 <script>
 import HxMap from '../page/mapview/HxMap'
-import HxMapView from '../../maputils/map'
+
 import Maptools from '../page/mapview/Maptools'
+import MapPopup from '../page/mapview/MapPopup'
 import store from '@/store'
-import Point from '@arcgis/core/geometry/Point'
-import Polygon from '@arcgis/core/geometry/Polygon'
-import Graphic from '@arcgis/core/Graphic'
+import {drawGeom} from '@/maputils/tabletomap/index'
 export default {
     name: 'dashboard',
     data() {
@@ -23,7 +23,7 @@ export default {
             handler(val) {
                if(val==="/"||val==="/dashboard"){
                     if(store.state.selectItem){
-                       this.drawGeom(store.state.selectItem)
+                       drawGeom(store.state.selectItem)
                     }
                }
             }
@@ -31,7 +31,7 @@ export default {
     },
     components: {
         HxMap,
-        Maptools
+        Maptools,MapPopup
 
     },
     computed: {
@@ -41,59 +41,58 @@ export default {
     },
     mounted(){
         if(store.state.selectItem){
-           this.drawGeom(store.state.selectItem)
+          drawGeom(store.state.selectItem)
         }
     },
 
     methods: {
-        drawGeom(item){
-            if(item.geometry){
+        // drawGeom(item){
+        //     if(item.geometry){
            
-             if(item.geometry.type.toLowerCase()==="point"){
-                 var point=new Point(item.geometry.coordinates)
-                 point.spatialReference=  {latestWkid:4523,wkid: 4523 } ;
-                const pointGraphic = new Graphic({
-                    geometry: point,
-                    symbol: {type: 'simple-marker',
-                            color: [255, 0, 0],
-                            size: 10,
-                            outline: {
-                                color: [255, 255, 255],
-                                width: 1
-                            }
-                    },
-                    attributes:item.properties
-                })
-            
-                  HxMapView.HmapView.graphics.removeAll();
-                  HxMapView.HmapView.graphics.add(pointGraphic) 
-                  HxMapView.HmapView.center= point     
-             }else if(item.geometry.type.toLowerCase()==="multipolygon"||item.geometry.type.toLowerCase()==="polygon"){
-                     var polygon=new Polygon( {
-                            rings: item.geometry.coordinates[0],
+        //      if(item.geometry.type.toLowerCase()==="point"){
+        //          var point=new Point(item.geometry.coordinates)
+        //          point.spatialReference=  {latestWkid:4523,wkid: 4523 } ;
+        //         const pointGraphic = new Graphic({
+        //             geometry: point,
+        //             symbol: {type: 'simple-marker',
+        //                     color: [255, 0, 0],
+        //                     size: 10,
+        //                     outline: {
+        //                         color: [255, 255, 255],
+        //                         width: 1
+        //                     }
+        //             },
+        //             attributes:item.properties
+        //         })
+        //           HxMapView.HmapView.graphics.removeAll();
+        //           HxMapView.HmapView.graphics.add(pointGraphic) 
+        //           HxMapView.HmapView.center= point     
+        //      }else if(item.geometry.type.toLowerCase()==="multipolygon"||item.geometry.type.toLowerCase()==="polygon"){
+        //              var polygon=new Polygon( {
+        //                     rings: item.geometry.coordinates[0],
                             
-                        });
-                       polygon.spatialReference=  {latestWkid:4523, wkid: 4523 };
-                    //    polygon.extent.spatialReference=  {latestWkid:4523, wkid: 4523 };
-                     const pointGraphic = new Graphic({
-                        geometry: polygon,
-                        symbol: {
-                            type: 'simple-fill',
-                            color: [0, 0, 255, 0.5],
-                            style: 'solid',
-                            outline: {
-                                color: 'red',
-                                width: 1
-                            }
-                        },
-                    attributes:item.properties
-                })
-                  HxMapView.HmapView.graphics.removeAll();
-                  HxMapView.HmapView.graphics.add(pointGraphic)
-                  HxMapView.HmapView.extent =polygon.extent 
-             }
-            }
-        }
+        //                 });
+        //                polygon.spatialReference=  {latestWkid:4523, wkid: 4523 };
+        //              const pointGraphic = new Graphic({
+        //                 geometry: polygon,
+        //                 symbol: {
+        //                     type: 'simple-fill',
+        //                     color: [0, 0, 255, 0.5],
+        //                     style: 'solid',
+        //                     outline: {
+        //                         color: 'red',
+        //                         width: 1
+        //                     }
+        //                 },
+        //             attributes:item.properties
+        //         })
+        //           HxMapView.HmapView.graphics.removeAll();
+        //           HxMapView.HmapView.graphics.add(pointGraphic)
+        //           HxMapView.HmapView.extent =polygon.extent 
+        //           store.commit('PopupShow', true)
+        //      }
+        //     }
+        // }
     }
 };
 </script>
