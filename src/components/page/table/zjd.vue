@@ -100,7 +100,6 @@ export default {
             searchfields:["zddm","zl","zldwmc"],
             query: {
                 layerName:"zjd",
-                filter:"",
                 isReturnGeometry:true,
                 spatialRel:"INTERSECTS",
                 filter:"",

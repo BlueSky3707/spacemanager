@@ -111,7 +111,6 @@ export default {
             searchfields:["bsm","tbbh","ysdm","dlmc","zldwmc"],
             query: {
                 layerName:"sdsj",
-                filter:"",
                 isReturnGeometry:true,
                 spatialRel:"INTERSECTS",
                 filter:"",

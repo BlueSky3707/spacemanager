@@ -102,7 +102,6 @@ export default {
             searchfields:["bhqbh"],
             query: {
                 layerName:"jbntbhq",
-                filter:"",
                 isReturnGeometry:true,
                 spatialRel:"INTERSECTS",
                 filter:"",
