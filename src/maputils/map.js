@@ -12,11 +12,7 @@ export default class HxMap {
       const pbaseLayer=new TileLayer({
         url:mapConfig.serverConfig.dtbaselayer
       })
-      const xzLayer = new TileLayer({
-        url: mapConfig.serverConfig.tdlyxz,
-        title: '土地利用现状',
-        id: 'tdlyxzid'
-      })
+     
       
       const stamen = new Basemap({
         baseLayers: [
