@@ -21,7 +21,7 @@ import {attrs} from '@/config/arrtbuteConfig'
 export default {
   data() {
     return {
-      zjdData:[] ,
+      zjdData:null ,
       attrs:[]
     }
   },
@@ -30,15 +30,21 @@ export default {
             handler(val) {
              this.zjdData= val.properties
               this.attrs= attrs[val.table]?attrs[val.table]:[]
+               
             }
         }
     },
   created() {
-
+    
   },
   mounted() {
-    // eslint-disable-next-line no-new
+    if(store.state.selectItem){
+     this.zjdData= store.state.selectItem.properties
+     this.attrs= attrs[store.state.selectItem.table]?attrs[store.state.selectItem.table]:[]
+   
+    }
     new DragElement(document.getElementById('mapPopupid'))
+   
   },
   methods: {
     close() {
