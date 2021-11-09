@@ -97,7 +97,7 @@ export default {
 
 
             ],
-            searchfields:["name","citycode"],
+            searchfields:["zddm","zl","zldwmc"],
             query: {
                 layerName:"zjd",
                 filter:"",

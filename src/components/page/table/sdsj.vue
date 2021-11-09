@@ -108,7 +108,7 @@ export default {
                 {field: "gdpdjb", alias: "耕地坡度级别",width:"auto"}
 
             ],
-            searchfields:["dlmc","zldwmc"],
+            searchfields:["bsm","dlmc","zldwmc"],
             query: {
                 layerName:"sdsj",
                 filter:"",

@@ -104,7 +104,7 @@ export default {
                 {field: "zjrxm", alias: "指界人姓名",width:"auto"}
 
             ],
-            searchfields:["dkmc","dklb"],
+            searchfields:["bsm","ysdm","dkmc","dklb"],
             query: {
                 layerName:"njq",
                 filter:"",
