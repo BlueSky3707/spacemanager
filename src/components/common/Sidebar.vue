@@ -54,12 +54,32 @@ export default {
                 {
                     icon: 'el-icon-lx-calendar',
                     index: 'njq',
-                    title: '表单相关',
+                    title: '数据管理',
                     subs: [
                         { 
                             
                             index: '0',
-                            title: '其他',
+                            title: '北滩镇',
+                            subs:[
+                                {
+                                    index: 'njq',
+                                    title: '农经权',
+                                },
+                                {
+                                     index: 'sdsj',
+                                     title: '三调数据',
+                                },
+                                {
+                                    index: 'zjd',
+                                    title: '宅基地'
+                                    
+                                 }
+                            ]
+                        },
+                         { 
+                            
+                            index: '2',
+                            title: '东湾镇',
                             subs:[
                                 {
                                     index: 'njq',
