@@ -7,7 +7,7 @@
     <div class="container1">
           <div class="left"> 
             <div v-for="(item,index) in attrs.fileds" :key="index">
-              <span>{{item.alias}}</span><span style="font-size:13px;">{{zjdData[item.field]}}</span>
+              <span>{{item.alias}}</span><span style="font-size:13px;" :title="zjdData[item.field]">{{zjdData[item.field]}}</span>
             </div>
           </div>
     </div>
@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import DragElement from '../../../utils/drag'
+import DragElement from '@/utils/drag'
 import store from '@/store'
-import {attrs} from '../../../config/arrtbuteConfig'
+import {attrs} from '@/config/arrtbuteConfig'
 export default {
   data() {
     return {
@@ -62,41 +62,7 @@ export default {
     cursor: pointer;
   }
 
-  .content {
-    padding-left: 15px;
 
-    span {
-      &:nth-child(3) {
-        font-size: 12px;
-        font-family: Microsoft YaHei;
-        font-weight: 400;
-        color: #333333;
-        line-height: 18px;
-      }
-
-      &:nth-child(1) {
-        font-size: 14px;
-        font-family: Microsoft YaHei;
-        font-weight: 400;
-        color: #333333;
-      }
-
-      &:nth-child(4) {
-        font-size: 14px;
-        font-family: Microsoft YaHei;
-        font-weight: 400;
-        color: #333333;
-      }
-
-      &:nth-child(2) {
-        font-size: 14px;
-        font-family: Microsoft YaHei;
-        font-weight: 400;
-        color: #333333;
-        line-height: 24px;
-      }
-    }
-  }
 
   .container1 {
     padding: 0 16px;
@@ -117,7 +83,7 @@ export default {
     span {
       &:nth-of-type(1) {
         width: 84px;
-         height: 18px;
+         min-height: 18px;
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;
@@ -126,7 +92,7 @@ export default {
 
       &:nth-of-type(2) {
         width: 12px;
-         height: 18px;
+          min-height: 18px;
         color: #929292;
       }
     }
@@ -153,18 +119,18 @@ export default {
     span {
       &:nth-child(1) {
         width: 154px;
-          height: 18px;
+           min-height: 18px;
       }
 
       &:nth-child(2) {
-        width: 95px;
-          height: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+          min-height: 18px;
+          // max-width: 270px;
       }
 
-      &:nth-child(3) {
-        width: 111px;
-          height: 18px;
-      }
+      
     }
   }
 }
@@ -192,8 +158,8 @@ export default {
     }
 
     &:nth-child(2) {
-      width: 95px;
-        height: 18px;
+      // width: 95px;
+        min-height: 18px;
     }
 
     &:nth-child(3) {
@@ -223,7 +189,7 @@ export default {
 
     span {
       &:nth-of-type(1) {
-        width: 150px;
+        width: 95px;
         height: 14px;
           height: 18px;
         font-size: 13px;
