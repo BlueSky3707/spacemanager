@@ -2,7 +2,10 @@
   <div id="mapPopupid" class="afry border" v-show="$store.state.isPopupShow" :style="{ bottom: 50 + 'px', left: 350 + 'px' }">
     <div class="top">
       <span>基础信息</span>
-      <span class="close" @click="close">x</span>
+      <el-button type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">导 出</el-button>
+      <span class="close" @click="close">
+        <i class="el-icon-close"></i>
+      </span>
     </div>
     <div class="container1">
           <div class="left"> 
@@ -18,6 +21,7 @@
 import DragElement from '@/utils/drag'
 import store from '@/store'
 import {attrs} from '@/config/arrtbuteConfig'
+import  mapView from '@/maputils/map'
 export default {
   data() {
     return {
@@ -44,12 +48,37 @@ export default {
    
     }
     new DragElement(document.getElementById('mapPopupid'))
-   
+   this.inEvent()
   },
   methods: {
     close() {
      store.commit('PopupShow', false)
-    }
+    },
+    inEvent(){
+        mapView.HmapView.when(function () {
+          mapView.HmapView.on('click', function (event) {
+            mapView.HmapView.hitTest(event).then(function (response) {
+              if (response.results.length) {
+                store.commit('PopupShow', true)
+              }
+            })
+          })
+        })
+    },
+    exportExcel() {
+        var that=this
+        require.ensure([], () => {  
+          const tHeader = [];  //表格内容
+          const data = [];  
+          const { export_json_to_excel } = require("../../../utils/Export2Excel");
+          that.attrs.fileds.forEach(item=>{
+             tHeader.push(item.alias)
+             data.push( that.zjdData[item.field])
+          })
+          export_json_to_excel(tHeader, [data], that.attrs.name);
+        });
+    },
+
   }
 }
 </script>
@@ -88,7 +117,7 @@ export default {
 
     span {
       &:nth-of-type(1) {
-        width: 84px;
+       width: 310px;
          min-height: 18px;
         font-size: 14px;
         font-family: Microsoft YaHei;
