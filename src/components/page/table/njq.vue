@@ -2,34 +2,35 @@
     <div>
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item>
-                    <i class="el-icon-lx-cascades"></i> {{name}}
-                </el-breadcrumb-item>
+                <el-breadcrumb-item> <i class="el-icon-lx-cascades"></i> {{ name }} </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="container">
             <div class="handle-box">
-            
-              
                 <el-input v-model="keywords" placeholder="关键字搜索" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
-                <el-button type="primary"  @click="exportExcel">导出</el-button>
+                <el-button type="primary" @click="exportExcel">导出</el-button>
             </div>
             <el-table
                 :data="tableData"
-               
                 border
                 class="table"
                 ref="multipleTable"
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
-                 @row-click="itemClick"
+                @row-click="itemClick"
                 id="city_table"
             >
-            <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
-            <el-table-column v-for="(item,index) in fields" :key="index" :prop="'properties.'+item.field" :label="item.alias"
-            align="center" :width="item.width" ></el-table-column>
-  
+                <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
+                <el-table-column
+                    v-for="(item, index) in tmpField" 
+                    :key="index"
+                    :prop="'properties.' + item.field"
+                    :label="item.alias"
+                    align="center"
+                    :width="item.width"
+               ></el-table-column>
+
                 <!-- <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
                         <el-button
@@ -77,78 +78,93 @@
 </template>
 
 <script>
-
-import * as postgis from '@/api/postgis'
-import store from '@/store'
+import * as postgis from '@/api/postgis';
+import store from '@/store';
 export default {
-  
     data() {
         return {
-            name:"农经权",
-            fields:[
-                {field: "bsm", alias: "标识码",width:"auto"},
-                {field: "ysdm", alias: "要素代码",width:"auto"},
-                {field: "dkbm", alias: "地块编码",width:"auto"},
-                {field: "dkmc", alias: "地块名称",width:"120"},
-                 {field: "syqxz", alias: "所属权性质",width:"auto"},
-                {field: "dklb", alias: "地块类别",width:"auto"},
-                {field: "tdlylx", alias: "土地利用类型",width:"auto"},
-                {field: "dldj", alias: "地力等级",width:"auto"},
-                {field: "sfjbnt", alias: "是否基本农田",width:"auto"},
-                {field: "scmj", alias: "实测面积",width:"auto"},
-                {field: "dkxz", alias: "地块西至",width:"auto"},
-                 {field: "dkdz", alias: "地块东至",width:"auto"},
-                 {field: "dknz", alias: "地块南至",width:"auto"},
-                {field: "dkbz", alias: "地块北至",width:"auto"},
-                // {field: "dkbzxx", alias: "地块备注信息",width:"auto"},
-                {field: "zjrxm", alias: "指界人姓名",width:"auto"}
-
+            name: '农经权',
+            tmpField:null,
+            fields: [
+                { field: 'bsm', alias: '标识码', width: 'auto',isShow:1 },
+                { field: 'ysdm', alias: '要素代码', width: 'auto',isShow:1 },
+                { field: 'dkbm', alias: '地块编码', width: 'auto' ,isShow:1},
+                { field: 'dkmc', alias: '地块名称', width: '120' ,isShow:1},
+                { field: 'syqxz', alias: '所属权性质', width: 'auto',isShow:1 },
+                { field: 'dklb', alias: '地块类别', width: 'auto',isShow:1 },
+                { field: 'tdlylx', alias: '土地利用类型', width: 'auto' ,isShow:1},
+                { field: 'dldj', alias: '地力等级', width: 'auto',isShow:1 },
+                { field: 'sfjbnt', alias: '是否基本农田', width: 'auto' ,isShow:1},
+                { field: 'scmj', alias: '实测面积', width: 'auto',isShow:1 },
+                { field: 'dkxz', alias: '地块西至', width: 'auto',isShow:1 },
+                { field: 'dkdz', alias: '地块东至', width: 'auto',isShow:1 },
+                { field: 'dknz', alias: '地块南至', width: 'auto' ,isShow:1},
+                { field: 'dkbz', alias: '地块北至', width: 'auto',isShow:1 },
+                { field: 'dkbzxx', alias: '地块备注信息', width: 'auto',isShow:1 },
+                { field: 'zjrxm', alias: '指界人姓名', width: 'auto' ,isShow:1},
+                { field: 'kjzb', alias: '空间坐标', width: 'auto', isShow:0 },
+                { field: 'scmjm', alias: '实测面积亩', width: 'auto', isShow:0},
+                { field: 'fbfbm', alias: '发包方编码', width: 'auto', isShow:0},
+                { field: 'cbjyqqdfs', alias: '承包经营权取得方式', width: 'auto', isShow:0},
+                { field: 'htmj', alias: '合同面积', width: 'auto',isShow:0 },
+                { field: 'cbhtbm', alias: '承包合同编码', width: 'auto',isShow:0 },
+                { field: 'lzhtbm', alias: '流转合同编码', width: 'auto', isShow:0},
+                { field: 'cbjyqzbm', alias: '承包经营权证编码', width: 'auto',isShow:0 },
+                { field: 'yhtmj', alias: '原合同面积', width: 'auto' ,isShow:0},
+                { field: 'htmjm', alias: '合同面积亩', width: 'auto' ,isShow:0 },
+                { field: 'yhtmjm', alias: '原合同面积亩', width: 'auto',isShow:0 },
+                { field: 'sfqqqg', alias: '是否确权确股', width: 'auto',isShow:0 },
+                { field: 'xian', alias: '县', width: 'auto',isShow:0 },
+                { field: 'xiang', alias: '乡', width: 'auto',isShow:0 },
+                { field: 'cun', alias: '村', width: 'auto' ,isShow:0},
+                { field: 'fbfmc', alias: '发包方名称', width: 'auto' ,isShow:0}
             ],
-            searchfields:["bsm","ysdm","dkmc","dklb"],
+            searchfields: ['bsm', 'ysdm', 'dkmc', 'dklb'],
             query: {
-                layerName:"njq",
-                isReturnGeometry:true,
-                spatialRel:"INTERSECTS",
-                filter:"",
+                layerName: 'njq',
+                isReturnGeometry: true,
+                spatialRel: 'INTERSECTS',
+                filter: '',
                 current: 1,
-                limit:10
+                limit: 10
             },
             tableData: [],
             multipleSelection: [],
             delList: [],
             editVisible: false,
             pageTotal: 0,
-            keywords:"",
+            keywords: '',
             form: {},
             idx: -1,
             id: -1
         };
     },
     created() {
+        this.tmpField=this.fields.filter(itm=>itm.isShow==1)
         this.getData();
     },
     methods: {
         // 获取 easy-mock 的模拟数据
         getData() {
-            postgis.search(this.query).then(res => {
-                if(res.data.data.features&&res.data.data.features.length>0){
-                        this.tableData = res.data.data.features;
-                        this.pageTotal = res.data.data.totalCount || 0;
-                }else{
-                   this.tableData = [];
-                        this.pageTotal =  0; 
+            postgis.search(this.query).then((res) => {
+                if (res.data.data.features && res.data.data.features.length > 0) {
+                   this.tableData = res.data.data.features;
+                    this.pageTotal = res.data.data.totalCount || 0;
+                } else {
+                    this.tableData = [];
+                    this.pageTotal = 0;
                 }
-            })
+            });
         },
         // 触发搜索按钮
         handleSearch() {
-            var sql=""
-            if(this.keywords){
-                var str=[];
-                this.searchfields.forEach(ite => {
-                   str.push(ite+" like'%"+this.keywords+ "%'"); 
+            var sql = '';
+            if (this.keywords) {
+                var str = [];
+                this.searchfields.forEach((ite) => {
+                    str.push(ite + " like'%" + this.keywords + "%'");
                 });
-               sql= str.join(" or ")
+                sql = str.join(' or ');
             }
             this.$set(this.query, 'current', 1);
             this.$set(this.query, 'filter', sql);
@@ -197,35 +213,32 @@ export default {
             this.$set(this.query, 'current', val);
             this.getData();
         },
-  
-    exportExcel() {
-          var that=this
-        require.ensure([], () => {   
-            const tHeader = [];  //表头名
-            const filterVal = [];  //表头字段
-               const { export_json_to_excel } = require("../../../utils/Export2Excel");
-            this.fields.forEach(item=>{
-                tHeader.push(item.alias)
-                filterVal.push(item.field)
-            })          
-            const list = that.tableData;  //表格内容
-            const data = that.formatJson(filterVal, list);  
-            export_json_to_excel(tHeader, data, that.name);
-        });
-    },
-    formatJson(filterVal, jsonData) {
-        return jsonData.map(v => filterVal.map(j => v.properties[j]));
-    },
-    itemClick(row){
-        row.table=this.query.layerName
-         store.state.selectItem=row
-       this.$router.push("/")
 
+        exportExcel() {
+            var that = this;
+            require.ensure([], () => {
+                const tHeader = []; //表头名
+                const filterVal = []; //表头字段
+                const { export_json_to_excel } = require('../../../utils/Export2Excel');
+                this.fields.forEach((item) => {
+                    tHeader.push(item.alias);
+                    filterVal.push(item.field);
+                });
+                const list = that.tableData; //表格内容
+                const data = that.formatJson(filterVal, list);
+                export_json_to_excel(tHeader, data, that.name);
+            });
+        },
+        formatJson(filterVal, jsonData) {
+            return jsonData.map((v) => filterVal.map((j) => v.properties[j]));
+        },
+        itemClick(row) {
+            row.table = this.query.layerName;
+            store.state.selectItem = row;
+            this.$router.push('/');
+        }
     }
-
-  }
-}
-
+};
 </script>
 
 <style scoped>

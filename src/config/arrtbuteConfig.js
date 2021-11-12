@@ -19,7 +19,23 @@ export const attrs={
              {field: "dkdz", alias: "地块东至"},
              {field: "dknz", alias: "地块南至"},
             {field: "dkbz", alias: "地块北至"},
-            {field: "zjrxm", alias: "指界人姓名"}
+            {field: "zjrxm", alias: "指界人姓名"},
+            { field: 'kjzb', alias: '空间坐标' },
+            { field: 'scmjm', alias: '实测面积亩'},
+            { field: 'fbfbm', alias: '发包方编码'},
+            { field: 'cbjyqqdfs', alias: '承包经营权取得方式'},
+            { field: 'htmj', alias: '合同面积'},
+            { field: 'cbhtbm', alias: '承包合同编码' },
+            { field: 'lzhtbm', alias: '流转合同编码'},
+            { field: 'cbjyqzbm', alias: '承包经营权证编码' },
+            { field: 'yhtmj', alias: '原合同面积'},
+            { field: 'htmjm', alias: '合同面积亩'},
+            { field: 'yhtmjm', alias: '原合同面积亩'},
+            { field: 'sfqqqg', alias: '是否确权确股'},
+            { field: 'xian', alias: '县' },
+            { field: 'xiang', alias: '乡' },
+            { field: 'cun', alias: '村'},
+            { field: 'fbfmc', alias: '发包方名称'}
         ]
     },
     sdsj :{

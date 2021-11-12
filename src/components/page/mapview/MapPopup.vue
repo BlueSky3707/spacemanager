@@ -2,7 +2,10 @@
   <div id="mapPopupid" class="afry border" v-show="$store.state.isPopupShow" :style="{ bottom: 50 + 'px', left: 350 + 'px' }">
     <div class="top">
       <span>基础信息</span>
-      <el-button type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">导 出</el-button>
+      <!-- <el-button type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">导 出</el-button> -->
+      <span class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">
+        <i class="el-icon-s-grid"></i>
+      </span>
       <span class="close" @click="close">
         <i class="el-icon-close"></i>
       </span>
@@ -96,9 +99,9 @@ export default {
     text-align: center;
     cursor: pointer;
   }
-
-
-
+.exportClass{
+  cursor: pointer;
+}
   .container1 {
     padding: 0 16px;
     height: 285px;
@@ -183,7 +186,7 @@ export default {
 
   span {
     &:nth-of-type(1) {
-      width: 111px;
+      // width: 111px;
       height: 15px;
         height: 18px;
       margin-right: 42px;
@@ -198,7 +201,7 @@ export default {
     }
 
     &:nth-child(3) {
-      width: 111px;
+      //width: 111px;
         height: 18px;
     }
   }
