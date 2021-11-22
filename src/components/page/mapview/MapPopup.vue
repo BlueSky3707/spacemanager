@@ -29,6 +29,7 @@ import {serverConfig} from '@/maputils/mapconfig'
 import PrintTask from '@arcgis/core/tasks/PrintTask'
 import PrintTemplate from '@arcgis/core/tasks/support/PrintTemplate'
 import PrintParameters from '@arcgis/core/tasks/support/PrintParameters'
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -115,28 +116,8 @@ export default {
       var that=this
       printTask.execute(params).then( (data)=> {
             if (data.url) { 
-              var params={
-              
-               dkbm:that.zjdData.dkbm,
-               dkmc:that.zjdData.dkmc,
-               dldj:that.zjdData.dldj,
-               scmj:that.zjdData.scmj,
-               dkxz:that.zjdData.dkxz,
-               dkdz:that.zjdData.dkdz,
-               dknz:that.zjdData.dknz,
-               dkbz:that.zjdData.dkbz,
-                fbfmc:that.zjdData.fbfmc,
-                htmj:that.zjdData.htmj,
-                cbhtbm:that.zjdData.cbhtbm,
-                cbjyqzbm:that.zjdData.cbjyqzbm,
-                cbfmc:that.zjdData.cbfmc,
-                tdlylx:that.zjdData.tdlylx,
-                cbfdz:that.zjdData.cbfdz,
-                zjhm:that.zjdData.zjhm,
-                cbqxz:that.zjdData.cbqxz,
-               cbqxq:that.zjdData.cbqxq,
-               url:data.url,
-              name:"tmp.ftl"}
+              var params={ ...that.zjdData,
+               url:data.url, name:"tmp.ftl"}
              
               that.downloadWord(params)
             }else {
@@ -154,37 +135,28 @@ export default {
       }
     )
   },
-   downloadWord (data) {
-     var that=this;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/postgisapi/word/exportword?datamap='+JSON.stringify(data).substr(1,JSON.stringify(data).length-2), true);
-        xhr.responseType = "blob";
-        xhr.onload = function () {
-          if (xhr.status === 200) {
-          
-            var blob = xhr.response;
-            if ( blob.size == 0 ) {
-              return  that.$message({
-                    message: '导出错误',
-                    type: 'warning'
-                  });
-            }
-            var time = new Date().getTime();
-            // 用a标签下载
-            var aelm = document.createElement('a');
-            aelm.href = URL.createObjectURL(blob);
-            aelm.download = time + '.doc';
-        
-            aelm.click();
-          
-          } else {
-            that.$message({
-                message: '导出错误',
-                type: 'warning'
-              });
+  // a标签下载word
+  downloadWord (data) {
+      var that=this;
+      axios({
+        method: 'post',
+        url: '/postgisapi/word/exportword',
+        responseType: 'blob',
+        data:data
+      }).then(res=>{
+        var blob= res.data
+          if ( res.data.size == 0 ) {
+            return  that.$message({
+                  message: '导出错误',
+                  type: 'warning'
+                });
           }
-        };
-        xhr.send(null);
+          var time = new Date().getTime();
+          var aelm = document.createElement('a');
+          aelm.href = URL.createObjectURL(blob);
+          aelm.download = time + '.doc';
+          aelm.click();
+      })
       }
   }
 }
