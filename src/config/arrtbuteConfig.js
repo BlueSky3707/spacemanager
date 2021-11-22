@@ -1,6 +1,6 @@
 
 export const attrs={
-    njq :{
+    njqn :{
         name:"农经权",
         titleField: "dkmc",
         fileds:[

@@ -2,7 +2,7 @@
   <div id="mapPopupid" class="afry border" v-show="$store.state.isPopupShow" :style="{ bottom: 50 + 'px', left: 350 + 'px' }">
     <div class="top">
       <span>基础信息</span>
-       <el-button v-if="$store.state.selectItem&&$store.state.selectItem.table==='njq'" type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">导 出</el-button>
+       <el-button v-if="$store.state.selectItem&&$store.state.selectItem.table==='njqn'" type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">导 出</el-button>
          <span v-else class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">
         <i class="el-icon-s-grid"></i>
       </span>
@@ -116,6 +116,7 @@ export default {
       printTask.execute(params).then( (data)=> {
             if (data.url) { 
               var params={
+              
                dkbm:that.zjdData.dkbm,
                dkmc:that.zjdData.dkmc,
                dldj:that.zjdData.dldj,
@@ -124,6 +125,16 @@ export default {
                dkdz:that.zjdData.dkdz,
                dknz:that.zjdData.dknz,
                dkbz:that.zjdData.dkbz,
+                fbfmc:that.zjdData.fbfmc,
+                htmj:that.zjdData.htmj,
+                cbhtbm:that.zjdData.cbhtbm,
+                cbjyqzbm:that.zjdData.cbjyqzbm,
+                cbfmc:that.zjdData.cbfmc,
+                tdlylx:that.zjdData.tdlylx,
+                cbfdz:that.zjdData.cbfdz,
+                zjhm:that.zjdData.zjhm,
+                cbqxz:that.zjdData.cbqxz,
+               cbqxq:that.zjdData.cbqxq,
                url:data.url,
               name:"tmp.ftl"}
              

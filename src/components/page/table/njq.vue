@@ -121,7 +121,7 @@ export default {
             ],
             searchfields: ['bsm', 'ysdm', 'dkmc', 'dklb'],
             query: {
-                layerName: 'njq',
+                layerName: 'njqn',
                 isReturnGeometry: true,
                 spatialRel: 'INTERSECTS',
                 filter: '',
