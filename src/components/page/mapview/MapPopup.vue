@@ -2,8 +2,8 @@
   <div id="mapPopupid" class="afry border" v-show="$store.state.isPopupShow" :style="{ bottom: 50 + 'px', left: 350 + 'px' }">
     <div class="top">
       <span>基础信息</span>
-      <!-- <el-button type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">导 出</el-button> -->
-      <span class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">
+       <el-button v-if="$store.state.selectItem&&$store.state.selectItem.table==='njq'" type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">导 出</el-button>
+         <span v-else class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">
         <i class="el-icon-s-grid"></i>
       </span>
       <span class="close" @click="close">
@@ -25,6 +25,10 @@ import DragElement from '@/utils/drag'
 import store from '@/store'
 import {attrs} from '@/config/arrtbuteConfig'
 import  mapView from '@/maputils/map'
+import {serverConfig} from '@/maputils/mapconfig'
+import PrintTask from '@arcgis/core/tasks/PrintTask'
+import PrintTemplate from '@arcgis/core/tasks/support/PrintTemplate'
+import PrintParameters from '@arcgis/core/tasks/support/PrintParameters'
 export default {
   data() {
     return {
@@ -81,7 +85,96 @@ export default {
           export_json_to_excel(tHeader, [data], that.attrs.name);
         });
     },
+    exportWord(){ 
+      const printTemplate = new PrintTemplate({
+        attributionVisible: false,
+        exportOptions: {
+          width: 1500,
+          height: 937
+        },
+        format: 'png32',
+        layout: 'map-only', 
+        layoutOptions: {
+          titleText: '',
+          authorText: '',
+          copyrightText: '',
+          scalebarUnit: 'Meters',
+          legendLayers: []
+        }
 
+      });
+    
+      const printTask = new PrintTask({
+        url: serverConfig.printUrl
+      })
+      const view = mapView.HmapView
+      const params = new PrintParameters({
+        view: view,
+        template: printTemplate
+      })
+      var that=this
+      printTask.execute(params).then( (data)=> {
+            if (data.url) { 
+              var params={
+               dkbm:that.zjdData.dkbm,
+               dkmc:that.zjdData.dkmc,
+               dldj:that.zjdData.dldj,
+               scmj:that.zjdData.scmj,
+               dkxz:that.zjdData.dkxz,
+               dkdz:that.zjdData.dkdz,
+               dknz:that.zjdData.dknz,
+               dkbz:that.zjdData.dkbz,
+               url:data.url,
+              name:"tmp.ftl"}
+             
+              that.downloadWord(params)
+            }else {
+          that.$message({
+            message: '导出错误',
+            type: 'warning'
+          });
+        }
+
+     }, (err) =>{
+        that.$message({
+          message: '导出错误',
+          type: 'warning'
+        });
+      }
+    )
+  },
+   downloadWord (data) {
+     var that=this;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/postgisapi/word/exportword?datamap='+JSON.stringify(data).substr(1,JSON.stringify(data).length-2), true);
+        xhr.responseType = "blob";
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+          
+            var blob = xhr.response;
+            if ( blob.size == 0 ) {
+              return  that.$message({
+                    message: '导出错误',
+                    type: 'warning'
+                  });
+            }
+            var time = new Date().getTime();
+            // 用a标签下载
+            var aelm = document.createElement('a');
+            aelm.href = URL.createObjectURL(blob);
+            aelm.download = time + '.doc';
+        
+            aelm.click();
+          
+          } else {
+            that.$message({
+                message: '导出错误',
+                type: 'warning'
+              });
+          }
+        };
+        xhr.send(null);
+      }
   }
 }
 </script>
