@@ -16,5 +16,8 @@ export const serverConfig = {
     jyyxdt: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gs_bywpdt/MapServer',
     dwzyx: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/dwziamge/MapServer',
     printUrl:"http://121.36.226.49:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
-    tdlyxz:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer"
+    tdlyxz:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer",
+    dzdt:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_vec/MapServer",
+    yxdt:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_img/MapServer",
+
 };

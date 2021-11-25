@@ -52,7 +52,7 @@ export default {
     imageClick ()  {
       BaseLayerUtils.showLayerByid("yxdt")
       BaseLayerUtils.hideLayerByid("dzdt")
-      let player=window.mapwiew.map.findLayerById("dtid")
+    
     },
      vectorClick  ()  {
         BaseLayerUtils.showLayerByid("dzdt")
@@ -84,15 +84,15 @@ el-button.is-circle {
     height: 29px !important;
 }
 .mapchange {
-    top: 45px;
+    top: 85px;
     right: 10px;
     position: absolute;
     background-color: white;
     width: 35px;
     height: 26px;
     text-align: center;
-    border-radius: 17px;
+    border-radius: 7px;
     padding: 4px 0;
-    display: none;
+    /* display: none; */
 }
 </style>

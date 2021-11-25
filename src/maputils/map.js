@@ -9,17 +9,26 @@ import VectorTileLayer from '@arcgis/core/layers/VectorTileLayer'
 export default class HxMap {
     static HmapView;
     static addGSBaseLayer() {
+      const dzdtLayer=new TileLayer({
+        url:mapConfig.serverConfig.dzdt,
+        visible:true,
+        id:"dzdt"
+      })
+      const yxdtLayer=new TileLayer({
+        url:mapConfig.serverConfig.yxdt,
+        visible:false,
+        id:"yxdt"
+
+      })
       const pbaseLayer=new TileLayer({
         url:mapConfig.serverConfig.dtbaselayer
       })
-     
-      
+
       const stamen = new Basemap({
         baseLayers: [
-           //wLayer,
-          // pLayer,
-          // dwpLayer
-          pbaseLayer,
+          dzdtLayer,
+          yxdtLayer,
+        //  pbaseLayer
         ]
       })
       return stamen
