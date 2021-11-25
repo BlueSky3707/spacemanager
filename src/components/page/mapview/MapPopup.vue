@@ -2,7 +2,9 @@
   <div id="mapPopupid" class="afry border" v-show="$store.state.isPopupShow" :style="{ bottom: 50 + 'px', left: 350 + 'px' }">
     <div class="top">
       <span>基础信息</span>
-       <el-button v-if="$store.state.selectItem&&$store.state.selectItem.table==='njqn'" type="primary" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">导 出</el-button>
+         <span v-if="$store.state.selectItem&&$store.state.selectItem.table==='njqn'" class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">
+        <i class="el-icon-s-grid"></i>
+      </span>
          <span v-else class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">
         <i class="el-icon-s-grid"></i>
       </span>
