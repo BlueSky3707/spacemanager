@@ -43,7 +43,7 @@ export const drawGeom=(item)=>{
                
       }
      mapView.HmapView.graphics.add(graphic) 
-      addLabel(item)  
+    //   addLabel(item)  
      store.commit('PopupShow', true)
     }
 }
