@@ -48,7 +48,7 @@ export const serverConfig = {
                                 {
                                     id: 'btzzjd',
                                     label: '宅基地',
-                                    url: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer',
+                                    url: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_zjd/MapServer',
                                     layrid: 'btzzjdid'
                                 }
                             ]
