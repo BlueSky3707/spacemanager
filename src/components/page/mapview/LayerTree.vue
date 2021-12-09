@@ -2,7 +2,7 @@
 
 <div class="layerTree" >
 <el-tree
-  class="filter-tree"
+
   :data="data"
    show-checkbox
   :props="defaultProps"
@@ -16,6 +16,7 @@
 import {serverConfig} from '../../../maputils/mapconfig'
 import FeatureLayer from '@arcgis/core/layers/FeatureLayer'
 import HxMap from '../../../maputils/map'
+import LayerTree from '../../../maputils/LayerTree'
 export default {
   components: {
   },
@@ -31,6 +32,7 @@ export default {
   },
   mounted() {
     this.data = serverConfig.layerTree
+    
   },
   methods: {
     handleNodeClick(node) {
@@ -38,13 +40,15 @@ export default {
       
     },
     handleCheckChange() {
-      // const res = this.$refs.tree.getCheckedNodes()
-      // const arr = []
-      // res.forEach((item) => {
-      //   if (item.url) {
-      //     arr.push(item)
-      //   }
-      // })
+      const res = this.$refs.tree.getCheckedNodes()
+      const arr = []
+      res.forEach((item) => {
+        if (item.url) {
+          arr.push(item)
+        }
+      })
+      LayerTree.showLayerByTree(arr)
+      LayerTree.hideSelLayer(arr)
 
     },
   }
