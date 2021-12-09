@@ -43,12 +43,13 @@ export const drawGeom=(item)=>{
                
       }
      mapView.HmapView.graphics.add(graphic) 
-    //  addLabel(item)  
+      addLabel(item)  
      store.commit('PopupShow', true)
     }
 }
  
 export const addLabel=(item)=>{
+    //面地块名称标注
     var polygon=new Polygon({ rings: item.geometry.coordinates[0] });
     polygon.spatialReference=  {latestWkid:4523, wkid: 4523 };
     var textgraphic = new Graphic({
@@ -67,6 +68,7 @@ export const addLabel=(item)=>{
          }
         })  
     mapView.HmapView.graphics.add(textgraphic) 
+    // 点位标注
     var textline=[]
     item.geometry.coordinates[0].forEach((eles,index) => {
         var len=eles.length
@@ -96,6 +98,7 @@ export const addLabel=(item)=>{
             }
         })
     });
+    // 文字背景渲染
     var point2=new Point([(mapView.HmapView.extent.xmax+polygon.extent.xmax)/2,mapView.HmapView.extent.ymax])
     point2.spatialReference=  {latestWkid:4523,wkid: 4523 } ;
     var bb= getPath(textline[0],textline.length)
@@ -116,7 +119,7 @@ export const addLabel=(item)=>{
          }
         })  
     mapView.HmapView.graphics.add(texttablebg) 
-
+    // 坐标文字标注
     var texttable = new Graphic({
         geometry: point2,
         symbol: {
