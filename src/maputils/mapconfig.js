@@ -10,14 +10,52 @@ export const serverConfig = {
         // ymax: 4219708.234019033,
         // ymin: 3852337.6893531457
     },
-    dtbaselayer:'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gssldt/MapServer',
-    wpdt:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer",
+    dtbaselayer: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gssldt/MapServer',
+    wpdt: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer',
     gsby: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gs_by2000dt/MapServer',
     jyyxdt: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gs_bywpdt/MapServer',
     dwzyx: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/dwziamge/MapServer',
-    printUrl:"http://121.36.226.49:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
-    tdlyxz:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer",
-    dzdt:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_vec/MapServer",
-    yxdt:"http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_img/MapServer",
-
+    printUrl: 'http://121.36.226.49:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task',
+    tdlyxz: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer',
+    dzdt: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_vec/MapServer',
+    yxdt: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_img/MapServer',
+    layerTree: [
+        {
+            id: 'b',
+            label: '白银市',
+            children: [
+                {
+                    id: 'b2',
+                    label: '靖远县',
+                    region: '县',
+                    children: [
+                        {
+                            id: 'btz',
+                            label: '北滩镇',
+                            children: [
+                                {
+                                    id: 'btzfwqq',
+                                    label: '房屋确权',
+                                    url: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_njq/MapServer',
+                                    layrid: 'btzfwqqid'
+                                },
+                                {
+                                    id: 'btzsd',
+                                    label: '三调',
+                                    url: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/gsby_sd/MapServer',
+                                    layrid: 'btzsdid'
+                                },
+                                {
+                                    id: 'btzzjd',
+                                    label: '宅基地',
+                                    url: 'http://121.36.226.49:6080/arcgis/rest/services/GSXM/by_zjd/MapServer',
+                                    layrid: 'btzzjdid'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 };

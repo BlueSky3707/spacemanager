@@ -3,14 +3,15 @@
         <HxMap></HxMap>
         <Maptools></Maptools>
         <MapPopup></MapPopup>
+        <LayerTree></LayerTree>
     </div>
 </template>
 
 <script>
 import HxMap from '../page/mapview/HxMap'
-
 import Maptools from '../page/mapview/Maptools'
 import MapPopup from '../page/mapview/MapPopup'
+import LayerTree from '../page/mapview/LayerTree'
 import store from '@/store'
 import {drawGeom} from '@/maputils/tabletomap/index'
 export default {
@@ -31,7 +32,7 @@ export default {
     },
     components: {
         HxMap,
-        Maptools,MapPopup
+        Maptools,MapPopup,LayerTree
 
     },
     computed: {
