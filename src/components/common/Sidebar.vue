@@ -53,45 +53,79 @@ export default {
                 },
                 {
                     icon: 'el-icon-lx-calendar',
-                    index: 'njq',
+                    index: 'sjgl',
                     title: '数据管理',
                     subs: [
                         { 
                             
                             index: '0',
-                            title: '北滩镇',
+                            title: '白银区',
                             subs:[
                                 {
-                                    index: 'njq',
+                                    index: 'byq_njq',
+                                    title: '农经权',
+                                }
+                            ]
+                        },
+                         { 
+                            
+                            index: '1',
+                            title: '会宁县',
+                            subs:[
+                                {
+                                    index: 'hnx_njq',
+                                    title: '农经权',
+                                }
+                            ]
+                        },
+                         { 
+                            
+                            index: '2',
+                            title: '靖远县',
+                            subs:[
+                                {
+                                    index: 'jyx_njq',
                                     title: '农经权',
                                 },
                                 {
-                                     index: 'sdsj',
-                                     title: '三调数据',
+                                     index: 'jyx_jbnt',
+                                     title: '基本农田',
                                 },
                                 {
-                                    index: 'zjd',
+                                    index: 'jyx_sd',
+                                    title: '三调数据'
+                                    
+                                 },
+                                {
+                                    index: 'jyx_zjd',
                                     title: '宅基地'
+                                    
+                                 },
+                                {
+                                    index: 'jyx_lqsj',
+                                    title: '两区数据'
+                                    
+                                 },
+                                {
+                                    index: 'jyx_ld',
+                                    title: '林地'
                                     
                                  }
                             ]
                         },
                          { 
                             
-                            index: '2',
-                            title: '东湾镇',
+                            index: '3',
+                            title: '平川区',
                             subs:[
+                               
                                 {
-                                    index: 'njq',
-                                    title: '农经权',
+                                     index: 'pcq_jbnt',
+                                     title: '基本农田',
                                 },
                                 {
-                                     index: 'sdsj',
-                                     title: '三调数据',
-                                },
-                                {
-                                    index: 'zjd',
-                                    title: '宅基地'
+                                    index: 'pcq_sd',
+                                    title: '三调数据'
                                     
                                  }
                             ]

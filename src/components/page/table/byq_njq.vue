@@ -83,7 +83,7 @@ import store from '@/store';
 export default {
     data() {
         return {
-            name: '农经权',
+            name: '白银区-农经权',
             tmpField:null,
             fields: [
                 { field: 'bsm', alias: '标识码', width: 'auto',isShow:1 },
@@ -103,25 +103,41 @@ export default {
                 { field: 'dkbzxx', alias: '地块备注信息', width: 'auto',isShow:1 },
                 { field: 'zjrxm', alias: '指界人姓名', width: 'auto' ,isShow:1},
                 { field: 'kjzb', alias: '空间坐标', width: 'auto', isShow:0 },
-                { field: 'scmjm', alias: '实测面积亩', width: 'auto', isShow:0},
-                { field: 'fbfbm', alias: '发包方编码', width: 'auto', isShow:0},
-                { field: 'cbjyqqdfs', alias: '承包经营权取得方式', width: 'auto', isShow:0},
-                { field: 'htmj', alias: '合同面积', width: 'auto',isShow:0 },
-                { field: 'cbhtbm', alias: '承包合同编码', width: 'auto',isShow:0 },
-                { field: 'lzhtbm', alias: '流转合同编码', width: 'auto', isShow:0},
-                { field: 'cbjyqzbm', alias: '承包经营权证编码', width: 'auto',isShow:0 },
-                { field: 'yhtmj', alias: '原合同面积', width: 'auto' ,isShow:0},
-                { field: 'htmjm', alias: '合同面积亩', width: 'auto' ,isShow:0 },
-                { field: 'yhtmjm', alias: '原合同面积亩', width: 'auto',isShow:0 },
-                { field: 'sfqqqg', alias: '是否确权确股', width: 'auto',isShow:0 },
-                { field: 'xian', alias: '县', width: 'auto',isShow:0 },
-                { field: 'xiang', alias: '乡', width: 'auto',isShow:0 },
-                { field: 'cun', alias: '村', width: 'auto' ,isShow:0},
-                { field: 'fbfmc', alias: '发包方名称', width: 'auto' ,isShow:0}
+                { field: 'scmjm', alias: '实测面积亩', width: 'auto', isShow:0}
+                // { field: 'fbfbm', alias: '发包方编码', width: 'auto', isShow:0},
+                // { field: 'cbjyqqdfs', alias: '承包经营权取得方式', width: 'auto', isShow:0},
+                // { field: 'htmj', alias: '合同面积', width: 'auto',isShow:0 },
+                // { field: 'cbhtbm', alias: '承包合同编码', width: 'auto',isShow:0 },
+                // { field: 'lzhtbm', alias: '流转合同编码', width: 'auto', isShow:0},
+                // { field: 'cbjyqzbm', alias: '承包经营权证编码', width: 'auto',isShow:0 },
+                // { field: 'yhtmj', alias: '原合同面积', width: 'auto' ,isShow:0},
+                // { field: 'htmjm', alias: '合同面积亩', width: 'auto' ,isShow:0 },
+                // { field: 'yhtmjm', alias: '原合同面积亩', width: 'auto',isShow:0 },
+                // { field: 'sfqqqg', alias: '是否确权确股', width: 'auto',isShow:0 },
+                // { field: 'xian', alias: '县', width: 'auto',isShow:0 },
+                // { field: 'xiang', alias: '乡', width: 'auto',isShow:0 },
+                // { field: 'cun', alias: '村', width: 'auto' ,isShow:0},
+                // { field: 'fbfmc', alias: '发包方名称', width: 'auto' ,isShow:0}
+
+               
+
+
+
+                // BSM,标识码	YSDM,要素代码	DKBM,地块编码	
+                // DKMC,地块名称	SYQXZ,所有权性质	DKLB,地块类别	TDLYLX,土地利用类型	DLDJ,地力等级	
+                // TDYT,土地用途	SFJBNT,是否基本农田	SCMJ,实测面积	DKDZ,地块东至	DKXZ,地块西至	
+                // DKNZ,地块南至	DKBZ,地块北至	DKBZXX,地块备注信息	ZJRXM,指界人姓名	KJZB,空间坐标	
+                // SCMJM,实测面积亩	FBFBM,发包方编码	CBFBM,承包方编码	CBJYQQDFS,承包经营权取得方式	
+                // HTMJ,确权合同面积	CBHTBM,承包合同编码	LZHTBM,流转合同编码	CBJYQZBM,承包经营权证登记簿编码	
+                // YHTMJ,原合同面积	HTMJM,合同面积（亩）	YHTMJM,原合同面积（亩）	SFQQQG,是否确权确股	POID,主键	
+                // XIAN,县	XIANG,乡	CUN,村	FBFMC,发包方名称	CBFMC,承包方名称	TFBH,图幅编号	DCJS,调查记事	
+                // DCJSR,调查记事人	DCRQ,调查日期	SCMJP,实测面积（平方米）	
+                // HTMJP,合同面积（平方米）	YHTMJP,原确权合同面积（平方米）	C1,备注字段
+
             ],
             searchfields: ['bsm', 'ysdm', 'dkmc', 'dklb'],
             query: {
-                layerName: 'njqn',
+                layerName: 'byq_njq',
                 isReturnGeometry: true,
                 spatialRel: 'INTERSECTS',
                 filter: '',

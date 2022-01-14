@@ -2,7 +2,7 @@
   <div id="mapPopupid" class="afry border" v-show="$store.state.isPopupShow" :style="{ bottom: 50 + 'px', left: 350 + 'px' }">
     <div class="top">
       <span>基础信息</span>
-         <span v-if="$store.state.selectItem&&$store.state.selectItem.table==='njqn'" class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">
+         <span v-if="$store.state.selectItem&&$store.state.selectItem.table==='njq'" class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportWord">
         <i class="el-icon-s-grid"></i>
       </span>
          <span v-else class="exportClass" style="padding: 7px 15px;border-radius: 8px;" @click="exportExcel">
@@ -75,6 +75,7 @@ export default {
           })
         })
     },
+    
     exportExcel() {
         var that=this
         require.ensure([], () => {  
@@ -119,6 +120,26 @@ export default {
       printTask.execute(params).then( (data)=> {
             if (data.url) { 
               var params={ ...that.zjdData,
+               fbfbm:"",
+               cbjyqqdfs:"",
+               htmj:"",
+               cbhtbm:"",
+               lzhtbm:"",
+               cbjyqzbm:"",
+               yhtmj:"",
+               htmjm:"",
+               yhtmjm:"",
+               sfqqqg:"",
+               xian:"",
+               xiang:"",
+               cun:"",
+              fbfmc:"",
+              cbqxq:"",
+              cbqxz:"",
+              cbfmc:"",
+              cbfdz:"",
+              zjhm:"",
+
                url:data.url, name:"tmp.ftl"}
              
               that.downloadWord(params)
