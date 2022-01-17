@@ -123,11 +123,7 @@ export default {
 
 
 
-                // BSM,标识码	YSDM,要素代码	DKBM,地块编码	
-                // DKMC,地块名称	SYQXZ,所有权性质	DKLB,地块类别	TDLYLX,土地利用类型	DLDJ,地力等级	
-                // TDYT,土地用途	SFJBNT,是否基本农田	SCMJ,实测面积	DKDZ,地块东至	DKXZ,地块西至	
-                // DKNZ,地块南至	DKBZ,地块北至	DKBZXX,地块备注信息	ZJRXM,指界人姓名	KJZB,空间坐标	
-                // SCMJM,实测面积亩	FBFBM,发包方编码	CBFBM,承包方编码	CBJYQQDFS,承包经营权取得方式	
+        //    FBFBM,发包方编码	CBFBM,承包方编码	CBJYQQDFS,承包经营权取得方式	
                 // HTMJ,确权合同面积	CBHTBM,承包合同编码	LZHTBM,流转合同编码	CBJYQZBM,承包经营权证登记簿编码	
                 // YHTMJ,原合同面积	HTMJM,合同面积（亩）	YHTMJM,原合同面积（亩）	SFQQQG,是否确权确股	POID,主键	
                 // XIAN,县	XIANG,乡	CUN,村	FBFMC,发包方名称	CBFMC,承包方名称	TFBH,图幅编号	DCJS,调查记事	

@@ -26,7 +26,7 @@
                  @row-click="itemClick"
                 id="city_table"
             >
-            <el-table-column type="selection" width="55" align="center"></el-table-column>
+            <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
             <el-table-column v-for="(item,index) in fields" :key="index" :prop="'properties.'+item.field" :label="item.alias"
             align="center" :width="item.width"></el-table-column>
   
@@ -92,7 +92,7 @@ export default {
                 {field: "tkmj", alias: "扣除地类面积",width:"auto"},	
                 {field: "tbmj", alias: "图斑面积",width:"auto"},	
                 {field: "jbntmj", alias: "基本农田面积",width:"auto"},
-                {field: "dlbz", alias: "地类备注",width:"auto"}	
+                // {field: "dlbz", alias: "地类备注",width:"auto"}	
 
             ],
             searchfields:["bsm","ysdm","jbnttbbh","tbbh","dlmc"],
